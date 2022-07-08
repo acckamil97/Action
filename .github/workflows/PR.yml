@@ -53,4 +53,15 @@ jobs:
       - name: deployment
         run: |
           sfdx force:source:deploy --sourcepath delta-package -u MyOrg
+
+      - name: merge source
+        env:
+          BASE_REF: ${{ github.event.pull_request.base.ref }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}
+        run: |
+          git checkout HEAD^
+          git merge origin/${{env.HEAD_REF}} --no-commit
+          git add force-app/
+          git commit -m "merge target branch:${{env.HEAD_REF}} and source branch:HEAD^"
+          git push origin
        
