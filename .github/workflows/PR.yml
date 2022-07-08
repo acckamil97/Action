@@ -27,8 +27,8 @@ jobs:
           BASE_REF: ${{ github.event.pull_request.base.ref }}
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
         run: |
-          git branch -a
-          $pathsString = git diff origin/main~0 --name-only force-app
+          Write-Host "git diff " + ${{env.BASE_REF}} +" " + ${{env.HEAD_REF}}
+          $pathsString = git diff HEAD^ --name-only force-app
           Write-Host $pathsString
           $pathArray = $pathsString.Split()
 
@@ -41,7 +41,7 @@ jobs:
               if (!(Test-Path -path $destination)) {New-Item $destination -Type Directory}
 
               $toCopy = "force-app"+"/main/default/"+$splitedPath[3]+"/"+$splitedPath[4]
-              WRITE-HOST $toCopy
+
               Copy-Item $toCopy/* -Destination $destination
 
           }
