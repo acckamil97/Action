@@ -60,7 +60,7 @@ jobs:
           HEAD_REF: ${{ github.event.pull_request.head.ref }}
         run: |
           git checkout ${{env.BASE_REF}}
-          git merge ${{env.HEAD_REF}} --no-commit
+          git merge origin/${{env.HEAD_REF}} --no-commit
           git add .
           git commit -m "merge target branch:${{env.HEAD_REF}} and source branch:${{env.BASE_REF}}"
           git push origin ${{env.HEAD_REF}}
