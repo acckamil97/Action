@@ -63,5 +63,5 @@ jobs:
           git merge origin/${{env.HEAD_REF}} --no-commit
           git add force-app/
           git commit -m "merge target branch:${{env.HEAD_REF}} and source branch:HEAD^"
-          git push origin
+          git push origin HEAD:${{env.BASE_REF}}
        
