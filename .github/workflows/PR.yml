@@ -63,5 +63,5 @@ jobs:
           git merge origin/${{env.HEAD_REF}} --no-commit
           git add .
           git commit -m "merge target branch:${{env.HEAD_REF}} and source branch:${{env.BASE_REF}}"
-          git push origin ${{env.HEAD_REF}}
+          git push origin
        
